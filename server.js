@@ -15,10 +15,21 @@ await connectDB();
 
 const app = Fastify({ logger: true });
 
+const allowedOrigins = process.env.ALLOWED_ORIGINS.split(',');
+
 await app.register(cors, {
-  origin: true,
-  credentials: true,
+  origin: (origin, cb) => {
+    if (!origin) return cb(null, true);
+
+    if (allowedOrigins.includes(origin)) {
+      return cb(null, true);
+    }
+
+    cb(new Error('Not allowed by CORS'), false);
+  },
+
   methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
+  credentials: true,
 });
 
 await app.register(jwt, {
