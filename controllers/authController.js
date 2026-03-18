@@ -1,7 +1,7 @@
-import bcrypt     from 'bcrypt';
+import bcrypt from 'bcrypt';
 import { Readable } from 'stream';
-import User        from '../models/User.js';
-import cloudinary  from '../configs/cloudinary.js';
+import User from '../models/User.js';
+import cloudinary from '../configs/cloudinary.js';
 
 function signToken(app, user) {
   return app.jwt.sign({ id: user._id }, { expiresIn: '7d' });
@@ -9,11 +9,11 @@ function signToken(app, user) {
 
 function safeUser(user) {
   return {
-    _id:       user._id,
-    username:  user.username,
-    email:     user.email,
+    _id: user._id,
+    username: user.username,
+    email: user.email,
     avatarUrl: user.avatarUrl,
-    bio:       user.bio,
+    bio: user.bio,
   };
 }
 
@@ -28,8 +28,8 @@ export async function register(request, reply) {
     return reply.code(409).send({ error: 'Email or username already in use' });
 
   const hashed = await bcrypt.hash(password, 10);
-  const user   = await User.create({ username, email, password: hashed });
-  const token  = signToken(request.server, user);
+  const user = await User.create({ username, email, password: hashed });
+  const token = signToken(request.server, user);
 
   reply.code(201).send({ token, user: safeUser(user) });
 }
@@ -73,13 +73,13 @@ export async function uploadAvatar(request, reply) {
   const data = await request.file();
   if (!data) return reply.code(400).send({ error: 'No file provided' });
 
-  // Stream buffer directly to Cloudinary — no disk writes
+  // Stream buffer directly to Cloudinary - no disk writes
   const buffer = await data.toBuffer();
 
   const result = await new Promise((resolve, reject) => {
     const stream = cloudinary.uploader.upload_stream(
       {
-        folder:         'wgwanime/avatars',
+        folder: 'wgwanime/avatars',
         transformation: [{ width: 200, height: 200, crop: 'fill', gravity: 'face' }],
       },
       (err, res) => err ? reject(err) : resolve(res)

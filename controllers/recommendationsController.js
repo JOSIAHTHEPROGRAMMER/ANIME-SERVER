@@ -1,5 +1,5 @@
 import Watchlist from '../models/Watchlist.js';
-import { ask }   from '../configs/ai.js';
+import { ask } from '../configs/ai.js';
 
 export async function getRecommendations(request, reply) {
   const watchlist = await Watchlist.find({ userId: request.user._id })
@@ -20,9 +20,9 @@ Format: [{ "title": "...", "reason": "..." }]
   `.trim();
 
   try {
-    const raw    = await ask(prompt);
-    const clean  = raw.replace(/```json|```/g, '').trim();
-    const data   = JSON.parse(clean);
+    const raw = await ask(prompt);
+    const clean = raw.replace(/```json|```/g, '').trim();
+    const data = JSON.parse(clean);
     reply.send({ data });
   } catch {
     reply.code(500).send({ error: 'Failed to generate recommendations' });
@@ -35,7 +35,7 @@ export async function getSimilarTo(request, reply) {
   // fetch title from Jikan to give the AI context
   let animeTitle = `anime with MAL ID ${malId}`;
   try {
-    const res  = await fetch(`https://api.jikan.moe/v4/anime/${malId}`);
+    const res = await fetch(`https://api.jikan.moe/v4/anime/${malId}`);
     const data = await res.json();
     animeTitle = data?.data?.title ?? animeTitle;
   } catch { /* use fallback title */ }
@@ -48,9 +48,9 @@ Format: [{ "title": "...", "reason": "..." }]
   `.trim();
 
   try {
-    const raw   = await ask(prompt);
+    const raw = await ask(prompt);
     const clean = raw.replace(/```json|```/g, '').trim();
-    const data  = JSON.parse(clean);
+    const data = JSON.parse(clean);
     reply.send({ data });
   } catch {
     reply.code(500).send({ error: 'Failed to generate recommendations' });
@@ -58,6 +58,6 @@ Format: [{ "title": "...", "reason": "..." }]
 }
 
 export async function dismissRecommendation(request, reply) {
-  // For now just acknowledge — full dismiss logic can store in a dismissed[] array on User later
+  // For now just acknowledge - full dismiss logic can store in a dismissed[] array on User later
   reply.send({ message: 'Dismissed' });
 }

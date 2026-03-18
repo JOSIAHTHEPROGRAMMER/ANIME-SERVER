@@ -26,7 +26,7 @@ await app.register(jwt, {
 });
 await app.register(multipart, { limits: { fileSize: 5 * 1024 * 1024 } });
 
-// Decorate request with an auth helper — routes call request.authenticate()
+// Decorate request with an auth helper - routes call request.authenticate()
 app.decorate('authenticate', async (request, reply) => {
   try {
     await request.jwtVerify();

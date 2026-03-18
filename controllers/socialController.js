@@ -74,14 +74,14 @@ export async function searchUsers(request, reply) {
     username: { $regex: q, $options: 'i' },
   }).select('-password -email').limit(20);
 
-  // try to get current user for isFollowing flag — optional since route is public
+  // try to get current user for isFollowing flag - optional since route is public
   let myFollowing = [];
   try {
     await request.jwtVerify();
     const me = await User.findById(request.user.id).select('following');
     myFollowing = me?.following.map(f => f.toString()) ?? [];
   } catch {
-    // not logged in — isFollowing will just be false for all results
+    // not logged in - isFollowing will just be false for all results
   }
 
   const data = users.map(u => ({
