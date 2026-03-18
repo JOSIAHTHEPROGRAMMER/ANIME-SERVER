@@ -1,0 +1,32 @@
+{
+  "name": "wgwanime-server",
+  "version": "1.0.0",
+  "description": "server for wgwanime frontend ",
+  "homepage": "https://github.com/JOSIAHTHEPROGRAMMER/Anime-App-server#readme",
+  "bugs": {
+    "url": "https://github.com/JOSIAHTHEPROGRAMMER/Anime-App-server/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/JOSIAHTHEPROGRAMMER/Anime-App-server.git"
+  },
+  "license": "MIT",
+  "author": "JOSIAHTHEPROGRAMMER",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "@fastify/cors": "^11.2.0",
+    "@fastify/jwt": "^10.0.0",
+    "@fastify/multipart": "^9.4.0",
+    "@google/generative-ai": "^0.24.1",
+    "bcrypt": "^6.0.0",
+    "cloudinary": "^2.9.0",
+    "dotenv": "^17.3.1",
+    "fastify": "^5.8.2",
+    "groq-sdk": "^1.1.1",
+    "mongoose": "^9.3.0"
+  }
+}
