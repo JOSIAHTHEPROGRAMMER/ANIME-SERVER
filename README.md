@@ -1,10 +1,6 @@
 <div align="center">
 
-<img src="https://capsule-render.vercel.app/api?type=waving&color=gradient&customColorList=6,11,20&height=160&section=header&text=WGWAnime+Server&fontSize=44&fontColor=fff&animation=twinkling&fontAlignY=38&desc=Fastify+%C2%B7+MongoDB+%C2%B7+Groq+AI&descAlignY=60&descSize=16" width="100%"/>
-
-<a href="https://git.io/typing-svg">
-  <img src="https://readme-typing-svg.demolab.com?font=Fira+Code&weight=600&size=20&pause=1000&color=CE1126&center=true&vCenter=true&width=600&lines=REST+API+for+WGWAnime;JWT+Auth+%C2%B7+MongoDB+%C2%B7+Groq+AI;Serverless+on+Vercel" alt="Typing SVG" />
-</a>
+# Anime-App-server
 
 <br/>
 
